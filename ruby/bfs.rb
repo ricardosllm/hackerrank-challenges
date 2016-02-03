@@ -1,28 +1,19 @@
-def adj_of_node(xy, n)
-    r = []
-    xy.each() do |c|
-        if c[:x] == n
-            r << c[:y]
-        end
-        if c[:y] == n
-            r << c[:x]
-        end
-    end
-    r
-end
+require 'set'
 
 def bfs(s, adj)
     level  = {}
     level[s] = 0
+    parent = {s: 'None'}
     i=1
     frontier = [s] # level i-1
     while !frontier.empty?
-        nxt = []  # level i
+        nxt = Set.new  # level i
         frontier.each() do |u|
             for v in adj[u.to_i] 
-                if !level.has_key? v # have we visited this node?
+                if !level.has_key? v
                     level[v] = i
-                    nxt.push v
+                    parent[v] = u
+                    nxt << v
                 end
             end
         end
@@ -34,19 +25,22 @@ end
 
 t = gets.strip.to_i
 for a0 in (1..t)
-    xy = []
+    xy = Set.new
     adj = {}
     nm = gets.strip.split ' '
     n = nm.first.to_i
+    (1..n).each() { |no| adj[no] = Set.new }
     m = nm.last.to_i
     for i in (1..m)
         a = gets.strip.split ' '
-        xy.push({x: a.first.to_i , y: a.last.to_i })
+        x = a.first.to_i
+        y = a.last.to_i
+  
+        adj[x] << y if !adj[x].include? y     
+        adj[y] << x if !adj[x].include? x     
     end
     s = gets.strip.to_i
-    for node in (1..n)
-        adj[node] = adj_of_node(xy, node)     
-    end
+    
     result = bfs(s, adj)
     
     to_print = {}
@@ -57,6 +51,6 @@ for a0 in (1..t)
             to_print[node] = -1
         end
     end
-    to_print.map() {|v| print v.last.to_s + ' '}
+    to_print.map() { |v| print v.last.to_s + ' ' }
     puts ''
 end
