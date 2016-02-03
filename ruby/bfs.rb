@@ -35,9 +35,8 @@ for a0 in (1..t)
         a = gets.strip.split ' '
         x = a.first.to_i
         y = a.last.to_i
-  
-        adj[x] << y if !adj[x].include? y     
-        adj[y] << x if !adj[x].include? x     
+        adj[x] << y
+        adj[y] << x
     end
     s = gets.strip.to_i
     
