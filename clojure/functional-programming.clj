@@ -4,7 +4,7 @@
 
 
 ; List Replication
-(fn[num lst]
+(fn [num lst]
     (dotimes [x (count lst)] 
         (dotimes [_ num] (println (+ x 1)))))
 
