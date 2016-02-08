@@ -73,3 +73,10 @@
     (dotimes [j input]
       (print (str (pascal-value i j) " ")))
     (println)))
+
+; ----------------------------------------------
+; String Mingling
+
+(let [a (read-line)
+      b (read-line)]
+  (println (apply str (interleave a b))))
