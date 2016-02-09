@@ -80,3 +80,63 @@
 (let [a (read-line)
       b (read-line)]
   (println (apply str (interleave a b))))
+
+; ----------------------------------------------
+; Filter Array
+
+(fn [delim lst]
+  (dotimes [i (count lst)]
+    (let [x (nth lst i)]
+      (if (< x delim) (println x)))))
+
+; ----------------------------------------------
+; Filter positions in a list
+
+(fn [lst]
+  (dotimes [i (count lst)]
+    (if (odd? i) (println (nth lst i)))))
+
+; ----------------------------------------------
+; Array Of N Elements
+
+(fn [n]
+  (take n (range)))
+
+; ----------------------------------------------
+; Reverse a list
+
+(fn [lst]
+  (loop [l lst]
+    (let [s    (count l)
+          tail (last l)]
+      (if tail (println tail))
+      (if (> s 0) (recur (take (- s 1) l))))))
+
+; ----------------------------------------------
+; Sum of odd elements
+
+(fn[lst]
+  (reduce
+    (fn [a b] (if (odd? b) (+ a b) a))
+    lst))
+
+; ----------------------------------------------
+; List Length
+
+(fn [lst]
+  (let [result (atom 0)]
+    (loop  [l lst
+            r result]
+      (let [remaining (rest l)]
+        (swap! r inc)
+        (if (empty? remaining)
+          @r
+          (recur remaining r))))))
+
+; ----------------------------------------------
+; Update List
+
+(fn [lst]
+  (dotimes [i (count lst)]
+    (let [val (nth lst i)]
+      (println (max val (- val))))))
