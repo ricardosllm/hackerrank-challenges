@@ -158,3 +158,17 @@
 
 (let [n (Integer/parseInt (read-line))] 
   (sierpinkski n))
+
+; ----------------------------------------------
+; Evaluating e^x
+
+(defn factorial [n] (reduce * (range 1 (inc n))))
+
+(defn ** [x n] (reduce * (repeat n x)))
+
+(let [t (Integer/parseInt (read-line))] 
+  (dotimes [_ t]
+    (let [v (Float/parseFloat (read-line))]
+      (println (reduce + (map 
+        (fn [n] (/ (** v n) (factorial n)))
+        (range 9)))))))
