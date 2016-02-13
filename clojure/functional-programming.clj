@@ -156,7 +156,7 @@
       )
     (println)))
 
-(let [n (Integer/parseInt (read-line))] 
+(let [n (Integer/parseInt (read-line))]
   (sierpinkski n))
 
 ; ----------------------------------------------
@@ -166,9 +166,12 @@
 
 (defn ** [x n] (reduce * (repeat n x)))
 
-(let [t (Integer/parseInt (read-line))] 
+(let [t (Integer/parseInt (read-line))]
   (dotimes [_ t]
     (let [v (Float/parseFloat (read-line))]
-      (println (reduce + (map 
+      (println (reduce + (map
         (fn [n] (/ (** v n) (factorial n)))
-        (range 9)))))))
+        (range 10)))))))
+
+
+
