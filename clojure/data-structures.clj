@@ -14,34 +14,21 @@
 ; ----------------------------------------------
 ; 2D Arrays- DS
 
-; 1 1 1 0
-; 0 1 0 0
-; 1 1 1 0
-; 0 0 2 4
-
-; 1 1 1 0 0 0
-; 0 1 0 0 0 0
-; 1 1 1 0 0 0
-; 0 0 2 4 4 0
-; 0 0 0 2 0 0
-; 0 0 1 2 4 0
-
-(nth (nth arr 2) 0)
-
 (defn nth-hourglass [arr x y] ; size = 6
   (let [res (atom 0)]
-    (loop [i x]
-      (swap! res + (reduce + (take 3 (take-last (- 6 y) (nth arr i)))))
-      (println @res)
+    (loop [i x j 0]
+      (let [line (take-last (- 6 y) (nth arr i))]
+        (if (even? j)
+          (swap! res + (reduce + (take 3 line)))
+          (swap! res + (nth line 1))))
       (if (< i (+ x 2))
-        (recur (+ i 1))))
+        (recur (+ i 1) (+ j 1))))
     @res))
 
-
 (let [arr (for [arr_temp (range 6)]
-            (map #(Integer/parseInt %) (split (read-line) #"\s+")))]
-  (println (nth-hourglass arr 0 0)))
-
-; TODO: (max (collection of all hourglass permutations where:
-;                                                            x (0...4)
-;                                                            y (0...4)
+            (map #(Integer/parseInt %) (split (read-line) #"\s+")))
+      result (atom [])]
+  (dotimes [i 4]
+    (dotimes [j 4]
+      (swap! result conj (nth-hourglass arr i j))))
+  (println (apply max @result)))
