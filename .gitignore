@@ -1,5 +1,6 @@
 .idea/
 /clojure/project.clj
 /clojure/.lein-repl-history
+/clojure/target
 /clojure/.nrepl-port
 /clojure/hackerrank-clojure.iml

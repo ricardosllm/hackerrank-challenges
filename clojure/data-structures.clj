@@ -36,19 +36,8 @@
 ; ----------------------------------------------
 ; Sparse Arrays
 
-; 4
-; aba
-; baba
-; aba
-; xzxb
-; 3
-; aba
-; xzxb
-; ab
-
-(let [n       (Integer/parseInt (read-line))
+(let [n (Integer/parseInt (read-line))
       strings (loop [i 0 r []] (if (>= i n) r (recur (+ i 1) (conj r (read-line)))))
-      q       (Integer/parseInt (read-line))
+      q (Integer/parseInt (read-line))
       queries (loop [j 0 r []] (if (>= j q) r (recur (+ j 1) (conj r (read-line)))))]
-  )
-
+  (dotimes [i q] (println (nth (map #((frequencies strings) % 0) queries) i))))
