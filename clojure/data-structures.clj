@@ -41,3 +41,4 @@
       q (Integer/parseInt (read-line))
       queries (loop [j 0 r []] (if (>= j q) r (recur (+ j 1) (conj r (read-line)))))]
   (dotimes [i q] (println (nth (map #((frequencies strings) % 0) queries) i))))
+
