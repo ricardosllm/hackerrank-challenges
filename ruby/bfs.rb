@@ -7,7 +7,7 @@ def bfs(s, adj)
     i=1
     frontier = [s] # level i-1
     while !frontier.empty?
-        nxt = Set.new  # level i
+        nxt = Set.new  # level i # need to pass timeout
         frontier.each() do |u|
             for v in adj[u.to_i] 
                 if !level.has_key? v
@@ -25,7 +25,7 @@ end
 
 t = gets.strip.to_i
 for a0 in (1..t)
-    xy = Set.new
+    xy = Set.new # need to pass timeout
     adj = {}
     nm = gets.strip.split ' '
     n = nm.first.to_i
