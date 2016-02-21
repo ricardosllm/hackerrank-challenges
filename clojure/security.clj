@@ -10,3 +10,5 @@
 (let [x (Integer/parseInt (read-line))]
   (println (* x x)))
 
+; ----------------------------------------------
+; Security - Bijective Functions
