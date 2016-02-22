@@ -12,3 +12,8 @@
 
 ; ----------------------------------------------
 ; Security - Bijective Functions
+
+(let [n (Integer/parseInt (read-line))
+      m_t (read-line)
+      m (split m_t #"\s+")]
+  (println (if (= (count (set m)) (count m)) "YES" "NO")))
