@@ -1,19 +1,19 @@
 ; List Replication
 
 (fn [num lst]
-    (dotimes [x (count lst)]
-        (dotimes [_ num] (println (+ x 1)))))
+  (dotimes [x (count lst)]
+    (dotimes [_ num] (println (+ x 1)))))
 
 ; ----------------------------------------------
 ; Jumping Bunnies
 
-(defn gcd [a b] (if (zero? b) a (recur b (mod a b))))  ; greatest common divisor
-(defn lcm [a b] (/ (* a b) (gcd a b)))                 ; lowest common multiple
+(defn gcd [a b] (if (zero? b) a (recur b (mod a b))))       ; greatest common divisor
+(defn lcm [a b] (/ (* a b) (gcd a b)))                      ; lowest common multiple
 
 (let [n-s (read-line)
       j-s (read-line)
       j (map read-string (split j-s #"\s+"))]
-      (println (reduce lcm j)))
+  (println (reduce lcm j)))
 
 ; ----------------------------------------------
 ; Rotate String
@@ -40,7 +40,7 @@
 
 (let [f (fn [a b] (if (zero? b) a (recur b (mod a b))))
       [m n] (map read-string (re-seq #"\d+" (read-line)))]
-    (println (f m n)))
+  (println (f m n)))
 
 ; ----------------------------------------------
 ; Fibonacci Numbers
@@ -61,7 +61,7 @@
 (defn factorial [n]
   (reduce * (range 1 (inc n))))
 
-(defn pascal-value [r c] ; r! / (c! * (r-c)!)
+(defn pascal-value [r c]                                    ; r! / (c! * (r-c)!)
   (let [x (/ (factorial r) (* (factorial c) (factorial (- r c))))]
     (cond
       (and (= 0 r) (= 1 c)) " "
@@ -107,7 +107,7 @@
 
 (fn [lst]
   (loop [l lst]
-    (let [s    (count l)
+    (let [s (count l)
           tail (last l)]
       (if tail (println tail))
       (if (> s 0) (recur (take (- s 1) l))))))
@@ -115,7 +115,7 @@
 ; ----------------------------------------------
 ; Sum of odd elements
 
-(fn[lst]
+(fn [lst]
   (reduce
     (fn [a b] (if (odd? b) (+ a b) a))
     lst))
@@ -125,8 +125,8 @@
 
 (fn [lst]
   (let [result (atom 0)]
-    (loop  [l lst
-            r result]
+    (loop [l lst
+           r result]
       (let [remaining (rest l)]
         (swap! r inc)
         (if (empty? remaining)
@@ -152,8 +152,8 @@
         (if (>= y (+ (- x) 31)) (print "1") (print "_"))
         ; "1" for y > x "_" for y < x
         (if (>= (+ 31 y) x) (print "1") (print "_"))
+        )
       )
-    )
     (println)))
 
 (let [n (Integer/parseInt (read-line))]
@@ -170,8 +170,37 @@
   (dotimes [_ t]
     (let [v (Float/parseFloat (read-line))]
       (println (reduce + (map
-        (fn [n] (/ (** v n) (factorial n)))
-        (range 10)))))))
+                           (fn [n] (/ (** v n) (factorial n)))
+                           (range 10)))))))
 
+; ----------------------------------------------
+; Area Under Curves and Volume of Revolving a Curve
+
+(a1) xb1 + (a2) xb2 + (a3) xb3 ...... (an) xbn
+
+1 2
+0 1
+2 20
+
+(use 'clojure.string)
+
+(defn parse-int [int]
+  (Integer/parseInt int))
+
+(defn exp [base exponent]
+  (Math/pow base exponent))
+
+(defn integral [as bs x]
+  (let [n (count as)]
+    (loop [i 0 result 0]
+      (let [term (exp (* (nth as i) x) (nth bs i))]
+        (if (>= i n)
+          result
+          (recur (+ i 1) (conj result term)))))))
+
+(let [a_t (read-line) a (map parse-int (split a_t #"\s+"))
+      b_t (read-line) b (map parse-int (split b_t #"\s+"))
+      l_t (read-line) lim (map parse-int (split l_t #"\s+"))]
+  (println (integral a b 2)))
 
 
