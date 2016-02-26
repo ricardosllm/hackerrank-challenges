@@ -194,8 +194,6 @@
   (let [n (count as)]
     (loop [i 0 result []]
       (let [term (exp (* (nth as i) x) (nth bs i))]
-        (println i)
-        (println result)
         (if (>= i n)
           result
           (recur (+ i 1) (conj result term)))))))
@@ -206,10 +204,7 @@
   (let [lower-lim (first lim)
         upper-lim (last lim)]
     (loop [i lower-lim result []]
-      (println i)
-      (println result)
       (if (> i upper-lim)
         result
-        (recur (+ i 0.001) (conj result (reduce + (integral a b i)))))))
-  )
+        (recur (+ i 0.001) (conj result (reduce + (integral a b i))))))))
 
