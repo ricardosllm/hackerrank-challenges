@@ -176,7 +176,7 @@
 ; ----------------------------------------------
 ; Area Under Curves and Volume of Revolving a Curve
 
-(a1) xb1 + (a2) xb2 + (a3) xb3 ...... (an) xbn
+(a1) x ^b1 + (a2) x ^b2 + (a3) x ^b3 ...... (an) xbn
 
 1 2
 0 1
@@ -194,21 +194,29 @@
   (let [n (count as)]
     (loop [i 0 result []]
       (let [term (exp (* (nth as i) x) (nth bs i))]
-        (println i)
-        (println result)
-        (if (>= i n)
-          result
+        (if (>= i (- n 1))
+          (conj result term)
           (recur (+ i 1) (conj result term)))))))
+
+(let [a [1 2]
+      b [0 1]
+      lim [2 20]]
+  (let [lower-lim (first lim)
+        upper-lim (last lim)]
+    (println (loop [i lower-lim result []]
+      ;(println i)
+      ;(println result)
+      (if (> i upper-lim)
+        result
+        (recur (+ i 0.001) (conj result (reduce + (integral a b i)))))))))
 
 (let [a_t (read-line) a (map parse-int (split a_t #"\s+"))
       b_t (read-line) b (map parse-int (split b_t #"\s+"))
       l_t (read-line) lim (map parse-int (split l_t #"\s+"))]
   (let [lower-lim (first lim)
         upper-lim (last lim)]
-    (loop [i lower-lim result []]
-      (println i)
-      (println result)
-      (if (> i upper-lim)
-        result
-        (recur (+ i 0.001) (conj result (reduce + (integral a b i))))))))
+    (println (loop [i lower-lim result []]
+              (if (> i upper-lim)
+                result
+                (recur (+ i 0.001) (conj result (reduce + (integral a b i)))))))))
 
