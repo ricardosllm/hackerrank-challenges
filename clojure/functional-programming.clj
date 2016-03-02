@@ -174,6 +174,20 @@
                            (range 10)))))))
 
 ; ----------------------------------------------
+; String-o-Permute
+
+(defn string-o-permute [string]
+  (apply str (loop [i 0 r []]
+      (if (>= i (count string))
+        r
+        (recur (+ i 2) (conj r (apply str (reverse (subs string i (+ i 2))))))))))
+
+(let [t (Integer/parseInt (read-line))
+      strings (loop [i 0 r []] (if (>= i t) r (recur (+ i 1) (conj r (read-line)))))]
+  (dotimes [n t]
+    (println (nth (map string-o-permute strings) n))))
+
+; ----------------------------------------------
 ; Area Under Curves and Volume of Revolving a Curve
 
 (a1) x ^b1 + (a2) x ^b2 + (a3) x ^b3 ...... (an) xbn
