@@ -223,6 +223,8 @@ y
   (let [lower-lim (first lim)
         upper-lim (last lim)]
     (println (loop [i lower-lim result []]
+      (println i)
+      (println result)
       (if (> i upper-lim)
         result
         (recur (+ i 0.001) (conj result (reduce + (integral a b i)))))))))
