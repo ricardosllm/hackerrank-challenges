@@ -217,18 +217,6 @@ y
           (conj result term)
           (recur (+ i 1) (conj result term)))))))
 
-(let [a [1 2]
-      b [0 1]
-      lim [2 20]]
-  (let [lower-lim (first lim)
-        upper-lim (last lim)]
-    (println (loop [i lower-lim result []]
-      (println i)
-      (println result)
-      (if (> i upper-lim)
-        result
-        (recur (+ i 0.001) (conj result (reduce + (integral a b i)))))))))
-
 (let [a_t (read-line) a (map parse-int (split a_t #"\s+"))
       b_t (read-line) b (map parse-int (split b_t #"\s+"))
       l_t (read-line) lim (map parse-int (split l_t #"\s+"))]
