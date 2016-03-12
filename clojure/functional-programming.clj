@@ -214,6 +214,7 @@ y
     (loop [i 0 result []]
       (let [term (exp (* (nth as i) x) (nth bs i))]
         (if (>= i (- n 1))
+
           (conj result term)
           (recur (+ i 1) (conj result term)))))))
 
